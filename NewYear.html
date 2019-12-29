@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8" />
+<title>Countdown to New Year's Day</title>
+
+<style>
+body{background-color: black;}
+
+*{
+  color: #dddddd;
+  text-align: center;
+ }
+
+h1{
+   font-size: 75px;
+  }
+
+div{
+    border: 6px ridge grey;
+    font-size: 150px;
+    padding: auto;
+    display: inline-block;
+    width: 2em;
+   }
+
+figure{
+       display: inline-block;
+      }
+
+figcaption{
+           font-size: 50px;
+           font-weight: bold;
+          }
+</style>
+</head>
+
+<body>
+<h1>Countdown to New Year's Day</h1>
+
+<figure>
+<div id="days"></div>
+<figcaption>Days</figcaption>
+</figure>
+
+
+<figure>
+<div id="hours"></div>
+<figcaption>Hours</figcaption>
+</figure>
+
+
+<figure>
+<div id="minutes"></div>
+<figcaption>Minutes</figcaption>
+</figure>
+
+
+<figure>
+<div id="seconds"></div>
+<figcaption>Seconds</figcaption>
+</figure>
+
+<script>
+
+//Initialize variables
+var today = new Date();
+var nextYear = new Date(today.getFullYear() + 1, 0, 1, 0, 0, 0, 0);
+
+//Call countdown function every second
+setInterval(function(){
+  today = new Date();
+  nextYear = new Date(today.getFullYear() + 1, 0, 1, 0, 0, 0, 0);
+  var ms = nextYear.getTime() - today.getTime();
+  
+  //Make calculations and output them
+  document.getElementById('days').innerHTML = addLeading(Math.trunc(ms / 86400000));
+  document.getElementById('hours').innerHTML = addLeading(Math.trunc((ms %= 86400000) / 3600000));
+  document.getElementById('minutes').innerHTML = addLeading(Math.trunc((ms %= 3600000) / 60000));
+  document.getElementById('seconds').innerHTML = addLeading(Math.trunc((ms %= 60000) / 1000));
+
+}, 1000);
+
+function addLeading(val){
+  return (val < 10) ? '0' + String(val): String(val);
+}
+
+</script>
+
+</body>
+
+</html>
